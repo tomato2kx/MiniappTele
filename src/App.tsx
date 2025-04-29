@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-// Import Telegram WebApp SDK
-import WebApp from '@twa-dev/sdk';
+import { useState } from 'react';
 
 function App() {
   const [isConnected, setIsConnected] = useState<boolean>(false);
