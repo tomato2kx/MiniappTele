@@ -20,7 +20,7 @@ function App() {
       manifestUrl={manifestUrl}
       actionsConfiguration={{
         // Format twaReturnUrl as required by TonConnect for returning to the app after wallet interaction
-        twaReturnUrl: 'https://t.me/app/TetrisK9_bot'
+        twaReturnUrl: 'https://t.me/TetrisK9_bot/app'
       }}
       // Configure to use testnet
       walletsListConfiguration={{
