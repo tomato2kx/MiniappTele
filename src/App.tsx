@@ -9,20 +9,17 @@ import HowToPlayPage from './pages/HowToPlayPage';
 // Components
 import BottomMenu from './components/BottomMenu';
 
-// Manifest for TonConnect
-const manifestUrl = 'https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json';
-
-// Note: In version 2.1.0 of @tonconnect/ui-react, network configuration is handled differently
+// Cấu hình cho TonConnect
 
 function App() {
   return (
     <TonConnectUIProvider
-      manifestUrl={manifestUrl}
+      manifestUrl="/tonconnect-manifest.json"
       actionsConfiguration={{
         // Format twaReturnUrl as required by TonConnect for returning to the app after wallet interaction
         twaReturnUrl: 'https://t.me/TetrisK9_bot/app'
       }}
-      // Configure to use testnet
+      // Cấu hình testnet
       walletsListConfiguration={{
         // The testnet configuration is handled through the wallet configuration
         includeWallets: [{
