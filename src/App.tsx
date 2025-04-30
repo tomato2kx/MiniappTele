@@ -15,24 +15,13 @@ import { tonConnectOptions } from './utils/tonConnectConfig';
 function App() {
   return (
     <TonConnectUIProvider
-      manifestUrl="/tonconnect-manifest.json" actionsConfiguration={{
+      manifestUrl={tonConnectOptions.manifestUrl}
+      actionsConfiguration={{
         // Format twaReturnUrl as required by TonConnect for returning to the app after wallet interaction
-        twaReturnUrl: 'https://t.me/TetrisK9_bot'
+        twaReturnUrl: 'https://t.me/TetrisK9_bot/app'
       }}
-      // Sử dụng cấu hình testnet từ tonConnectOptions
-      walletsListConfiguration={{
-        // The testnet configuration is handled through the wallet configuration
-        includeWallets: [{
-          name: 'Tonkeeper',
-          appName: 'tonkeeper',
-          bridgeUrl: 'https://bridge.tonapi.io/bridge',
-          universalLink: 'https://app.tonkeeper.com/ton-connect',
-          deepLink: 'tonkeeper://',
-          imageUrl: 'https://tonkeeper.com/assets/tonconnect-icon.png',
-          aboutUrl: 'https://tonkeeper.com',
-          platforms: ['ios', 'android', 'chrome']
-        }]
-      }}
+      // Sử dụng danh sách ví từ tonConnectOptions
+      walletsListConfiguration={tonConnectOptions.walletsListConfiguration}
     >
       <Router>
         <div className="app-container">
