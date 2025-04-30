@@ -10,16 +10,16 @@ import HowToPlayPage from './pages/HowToPlayPage';
 import BottomMenu from './components/BottomMenu';
 
 // Cấu hình cho TonConnect
+import { tonConnectOptions } from './utils/tonConnectConfig';
 
 function App() {
   return (
     <TonConnectUIProvider
-      manifestUrl="/tonconnect-manifest.json"
-      actionsConfiguration={{
+      manifestUrl="/tonconnect-manifest.json" actionsConfiguration={{
         // Format twaReturnUrl as required by TonConnect for returning to the app after wallet interaction
-        twaReturnUrl: 'https://t.me/TetrisK9_bot/app'
+        twaReturnUrl: 'https://t.me/TetrisK9_bot'
       }}
-      // Cấu hình testnet
+      // Sử dụng cấu hình testnet từ tonConnectOptions
       walletsListConfiguration={{
         // The testnet configuration is handled through the wallet configuration
         includeWallets: [{
@@ -32,7 +32,8 @@ function App() {
           aboutUrl: 'https://tonkeeper.com',
           platforms: ['ios', 'android', 'chrome']
         }]
-      }}>
+      }}
+    >
       <Router>
         <div className="app-container">
           <Routes>

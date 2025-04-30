@@ -1,8 +1,74 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTonAddress, useTonWallet } from '@tonconnect/ui-react';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
+  const wallet = useTonWallet();
+  const userAddress = useTonAddress();
+  const navigate = useNavigate();
+  const [balance, setBalance] = useState<string>('0');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Hàm để lấy số dư TON từ API testnet
+  const fetchTonBalance = async (address: string) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`https://testnet.toncenter.com/api/v2/getAddressBalance?address=${address}`);
+      const data = await response.json();
+      if (data.ok) {
+        // Chuyển đổi từ nanoTON sang TON (1 TON = 10^9 nanoTON)
+        const tonBalance = (parseInt(data.result) / 1000000000).toFixed(2);
+        setBalance(tonBalance);
+      }
+    } catch (error) {
+      console.error('Lỗi khi lấy số dư TON:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (wallet && userAddress) {
+      fetchTonBalance(userAddress);
+    }
+  }, [wallet, userAddress]);
+
   return (
-    <div className="bg-gray-100 flex justify-center items-center min-h-screen p-4 pt-16 pb-20">
+    <div className="bg-gray-100 flex flex-col justify-start items-center min-h-screen p-4 pt-16 pb-20">
+      {wallet ? (
+        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-4">Thông tin ví TON</h2>
+          <div className="flex justify-between items-center bg-blue-50 p-4 rounded-lg">
+            <div>
+              <p className="text-sm text-gray-600">Địa chỉ ví:</p>
+              <p className="text-sm font-medium text-gray-800 truncate max-w-[200px]">{userAddress}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm text-gray-600">Số dư:</p>
+              <p className="text-2xl font-bold text-blue-600">
+                {isLoading ? (
+                  <span className="inline-block w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></span>
+                ) : (
+                  `${balance} TON`
+                )}
+              </p>
+              <p className="text-xs text-gray-500">Testnet</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-xl font-bold text-center text-gray-800 mb-4">Chưa kết nối ví</h2>
+          <p className="text-center text-gray-600 mb-4">Kết nối ví TON để xem số dư và tham gia xổ số</p>
+          <button 
+            onClick={() => navigate('/wallet')} 
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Kết nối ví ngay
+          </button>
+        </div>
+      )}
+
       <table className="w-full max-w-md border border-gray-300 bg-white shadow-md">
         <thead>
           <tr className="bg-gray-700">
