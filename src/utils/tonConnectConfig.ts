@@ -1,5 +1,5 @@
 import { CHAIN } from '@tonconnect/ui';
-import { Wallet, UIWallet } from '@tonconnect/ui-react';
+import { UIWallet } from '@tonconnect/ui-react';
 
 // Cấu hình TonConnect với testnet
 export const tonConnectOptions = {
