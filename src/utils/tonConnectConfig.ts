@@ -45,6 +45,23 @@ export const tonConnectOptions = {
         imageUrl: 'https://raw.githubusercontent.com/ton-connect/demo-dapp-with-wallet/main/public/browser_extension.svg',
         aboutUrl: 'https://github.com/ton-connect/sdk',
         platforms: ['chrome', 'firefox', 'safari']
+      },
+      // Thêm nút Desktop
+      {
+        name: 'Desktop',
+        appName: 'desktop',
+        imageUrl: 'https://raw.githubusercontent.com/ton-connect/demo-dapp-with-wallet/main/public/desktop.svg',
+        aboutUrl: 'https://ton.org/wallets',
+        platforms: ['mac', 'windows', 'linux']
+      },
+      // OpenMask cho desktop
+      {
+        name: 'OpenMask',
+        appName: 'openmask',
+        jsBridgeKey: 'openmask',
+        imageUrl: 'https://openmask.app/assets/logo.png',
+        aboutUrl: 'https://www.openmask.app/',
+        platforms: ['chrome', 'firefox']
       }
     ]
   }
